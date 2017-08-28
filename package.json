@@ -1,0 +1,22 @@
+{
+  "name": "pharmacy_system_dgjl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zadrok/pharmacy_system_DGJL.git"
+  },
+  "author": "DGJL-Group1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zadrok/pharmacy_system_DGJL/issues"
+  },
+  "homepage": "https://github.com/zadrok/pharmacy_system_DGJL#readme",
+  "dependencies": {
+    "mysql": "^2.14.1"
+  }
+}
