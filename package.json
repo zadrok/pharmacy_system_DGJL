@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/zadrok/pharmacy_system_DGJL#readme",
   "dependencies": {
-    "mysql": "^2.14.1"
+    "yarn": "^0.27.5"
   }
 }
