@@ -1,22 +1,23 @@
 {
   "name": "pharmacy_system_dgjl",
   "version": "1.0.0",
-  "description": "",
+  "description": "php app for DP2 project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zadrok/pharmacy_system_DGJL.git"
-  },
+  "repository": "git+https://github.com/zadrok/pharmacy_system_DGJL.git",
   "author": "DGJL-Group1",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/zadrok/pharmacy_system_DGJL/issues"
   },
   "homepage": "https://github.com/zadrok/pharmacy_system_DGJL#readme",
   "dependencies": {
+    "angular": "^1.6.6",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "sqlite": "^2.8.0",
     "yarn": "^0.27.5"
   }
 }
