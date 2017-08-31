@@ -6,6 +6,8 @@ var path = require('path')
 app.set('port', 3000);
 console.log(path.join(__dirname + '/../public/css'));
 
+app.use('/js', express.static(path.join(__dirname + '/../public/images')));
+app.use('/js', express.static(path.join(__dirname + '/../public/js')));
 app.use('/css', express.static(path.join(__dirname + '/../public/css')));
 app.use('/lib', express.static(path.join(__dirname + '/../../node_modules')));
 app.use('/', express.static(path.join(__dirname, '../public/views')));
