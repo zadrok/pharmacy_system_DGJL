@@ -19,3 +19,8 @@ var server = app.listen(app.get('port'), function() {
   var port = server.address().port;
   console.log('Magic happens on port ' + port);
 });
+
+app.get('/*.json', function (req, res) {
+  console.log("pleb")
+  res.json("[{pleb:'pleb'}]")
+})

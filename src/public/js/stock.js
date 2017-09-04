@@ -3,16 +3,18 @@ var app = angular.module("myApp", []);
 app.filter("offset", function() {
   return function(input, start) {
     start = parseInt(start, 10);
-    return input.slice(start);
+    return input?input.slice(start) : "";
   };
 });
 
 app.controller("paginationCtrl1", function ($scope, $http) {
+  console.log("ctrl")
   $scope.stockPerPage = 5;
   $scope.currentPage = 0;
   $http.get('testStock.json')
   .then(
     function (response) {
+      console.log(response)
       $scope.stock = response.data;
     },
     function (response) {
