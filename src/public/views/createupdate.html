@@ -17,7 +17,7 @@
 <body>
   <div class="container-fluid hidden-xs">
     <div class="row">
-      <div class="col-md-12 text-center"><p>1.1 HEADER</p></div>
+      <div class="col-md-12 text-center"><p>Pharmacy System DGJL</p></div>
     </div>
   </div>
 
@@ -32,28 +32,95 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand visible-xs">HEADER</a>
+      <a href="#" class="navbar-brand visible-xs">Pharmacy System DGJL</a>
     </div>
     <div class="collapse navbar-collapse" id="mymenu"> <!-- nav body -->
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li class="active"><a href="createupdate.html">Create / Update</a></li>
-      <li><a href="get.html">Get</a></li>
-      <li><a href="delete.html">Delete</a></li>
-      <li><a href="#">FOUR</a></li>
-      <li><a href="#">FIVE</a></li>
-    </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="stock.html">Stock List</a></li>
+        <li class="active"><a href="createupdate.html">Create/Update Stock</a></li>
+        <li><a href="delete.html">Delete Stock</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+
+
+        <form class="form-horizontal" name="CreateUpdateForm" novalidate="novalidate" data-ng-controller="CreateUpdateCtrl">
+
+          <div class="row well">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <h1>Create or Update Stock</h1>
+            </div>
+          </div>
+
+
+          <div class="row well">
+            <div class="col-md-8">
+
+              <div class="form-group">
+                <label for="iCode" class="col-sm-2 control-label">Item Code</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="iCode" ng-pattern="/^[a-zA-Z0-9\s]*$/" placeholder="Item Code" data-ng-model="iCode" required="required" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="iName" class="col-sm-2 control-label">Item Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="iName" ng-pattern="/^[a-zA-Z0-9\s]*$/" placeholder="Item Name" data-ng-model="iName" required="required" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row well">
+            <div class="col-md-8">
+
+
+
+            </div>
+          </div>
+
+          <div class="row well">
+            <div class="col-md-8">
+
+
+
+            </div>
+          </div>
+
+          <div class="row well">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+              <p>
+                <button type="button" class="btn btn-primary btn-lg" ng-disabled="!CreateUpdateForm.$valid">Submit</button>
+              </p>
+            </div>
+          </div>
+
+        </form>
+
+
+      </div>
+    </div>
   </div>
-</nav>
 
 
 
   <!-- jQuery – required for Bootstrap's JavaScript plugins) -->
-	<script src="/lib/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap  plug-ins  file -->
-	<script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- AngularJS file -->
-	<script src="/lib/angular/angular.min.js"></script>
-  <script src="/js/stock.js"></script>
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap  plug-ins  file -->
+  <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AngularJS file -->
+  <script src="/lib/angular/angular.min.js"></script>
+  <!-- JS file used on this page -->
+  <script src="/js/createUpdate.js"></script>
 </body>
 </html>
