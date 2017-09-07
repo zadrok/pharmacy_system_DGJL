@@ -1,6 +1,6 @@
-var app = angular.module("AllStockApp", []);
+var app = angular.module("StockApp", []);
 
-app.controller("AllStockCtrl", function ($scope, $http) {
+app.controller("StockCtrl", function ($scope, $http) {
   $http.get('/js/testStock.json')
   .then(
     function (response) {

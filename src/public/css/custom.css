@@ -6,3 +6,8 @@
 .navbar .navbar-collapse {
   text-align: center;
 }
+
+#welcomePageBlockOne {
+  height: 300px;
+  color: #33F6FF;
+}
