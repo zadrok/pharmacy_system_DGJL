@@ -1,7 +1,7 @@
 var express = require('express')
 var app = express()
 var path = require('path')
-var data = require('db-setup')
+var data = require('./modules/php-crud/db-setup')
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(':memory:');
 
