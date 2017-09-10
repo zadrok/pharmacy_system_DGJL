@@ -1,0 +1,49 @@
+
+
+module.exports.createDatabase = function(db) {
+  db.serialize(()=>{
+    try {
+      //db.run('CREATE TABLE IF NOT EXISTS orders ( id integer NOT NULL CONSTRAINT order_pk PRIMARY KEY, order_no character(12) NOT NULL, sales_person_id integer NOT NULL, date datetime NOT NULL, CONSTRAINT client_order FOREIGN KEY (sales_person_id) REFERENCES sales_person (id))');
+    //  db.run('CREATE TABLE IF NOT EXISTS order_item (id integer NOT NULL CONSTRAINT order_item_pk PRIMARY KEY, order_id integer NOT NULL, product_id integer NOT NULL, amount integer NOT NULL, CONSTRAINT order_order_item FOREIGN KEY (order_id) REFERENCES "order" (id), CONSTRAINT product_order_item FOREIGN KEY (product_id) REFERENCES product (id))');
+      db.run('CREATE TABLE IF NOT EXISTS stock_items (\
+        sku INTEGER PRIMARY KEY, \
+        name NOT NULL, \
+        price NOT NULL, \
+        quantity NOT NULL)');
+      db.run('CREATE TABLE IF NOT EXISTS sales_records (\
+          id INTEGER PRIMARY KEY, \
+          date NOT NULL, \
+          sku NOT NULL, \
+          quantity NOT NULL)');
+      //db.run('CREATE TABLE IF NOT EXISTS sales_person (id integer NOT NULL CONSTRAINT sales_person_pk PRIMARY KEY, full_name varchar(255) NOT NULL, password varchar(20) NOT NULL)');
+    } catch(e){
+      console.log(e);
+    }
+  });
+  db.serialize(() => {
+      initStockItemsTable(db)
+  });
+}
+
+// Reads the JSON file that contains all the stock item definitons
+function initStockItemsTable(db) {
+  let stockItems = require("./php-stock_items.json");
+  let column_names = Object.keys(stockItems[0]);
+  let valueSets = stockItems.map(item => Object.values(item));
+  let placeholders = `${valueSets.map(valueSet => `(${valueSet.map(value => '?').join(',')})` ).join(',')}`;
+  let sql = `INSERT INTO stock_items(${column_names}) VALUES ${placeholders}`;
+  let flattnedValues = [].concat.apply([], valueSets);
+  db.run(sql, flattnedValues, (err) => {
+    if (err) { return console.error(err.message); }
+    console.log(`Rows inserted ${this.changes}`);
+  });
+}
+
+module.exports.getStockItems = function(db, callback) {
+  let sql = `SELECT * FROM stock_items`;
+  db.all(sql, [], (err, rows) => {
+    if (err) { return console.error(err.message); }
+    //console.log(rows);
+    callback(rows)
+  });
+}

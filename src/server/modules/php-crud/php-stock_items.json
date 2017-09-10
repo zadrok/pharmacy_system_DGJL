@@ -1,0 +1,5 @@
+[{"sku":1, "name":"Bandaid", "price":4, "quantity":14},
+ {"sku":2, "name":"Multivitamins", "price":15, "quantity":62},
+ {"sku":3, "name":"Cold and Flu", "price":10, "quantity":15},
+ {"sku":4, "name":"Paracetamol", "price":3, "quantity":32},
+ {"sku":5, "name":"Ibuprofen", "price":2.5, "quantity":100}]

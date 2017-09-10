@@ -3,6 +3,20 @@ var app = angular.module("CreateUpdateApp", []);
 
 app.controller("CreateUpdateCtrl",['$scope', function($scope) {
   $scope.good = false;
+
+  // $scope.CreateStockItem = function(itemCode){
+  //   $http.post('/create')
+  //   .then(
+  //     function (response) {
+  //       //console.log(response);
+  //       $scope.stock = response.data;
+  //
+  //     //console.log($scope.stock.length);
+  //     },
+  //     function (response) {
+  //       // error handling routine
+  //     }
+  // };
 }]);
 
 app.directive('ngContainSpecial', function() {
@@ -24,4 +38,5 @@ app.directive('ngContainSpecial', function() {
 			mCtrl.$parsers.push(myValidation);
 		}
 	};
+
 });

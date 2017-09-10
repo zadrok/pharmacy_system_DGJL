@@ -85,14 +85,16 @@
               <tr>
                 <th class="text-center">Code</th>
                 <th class="text-center">Name</th>
+                <th class="text-center">Price</th>
                 <th class="text-center">Quantity</th>
                 <th class="text-center">Options</th>
               </tr>
             </thead>
             <tbody>
               <tr data-ng-repeat="s in stock | filter:searchFilter">
-                <td>{{s.code}}</td>
+                <td>{{s.sku}}</td>
                 <td>{{s.name}}</td>
+                <td>{{s.price}}</td>
                 <td>{{s.quantity}}</td>
                 <td>
                   <button class="btn btn-info" data-ng-click="Update(s.code)">Update Item</button>

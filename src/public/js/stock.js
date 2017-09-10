@@ -2,7 +2,7 @@
 var app = angular.module("StockApp", []);
 
 app.controller("StockCtrl", function ($scope, $http) {
-  $http.get('/js/testStock.json')
+  $http.post('/read')
   .then(
     function (response) {
       //console.log(response);
