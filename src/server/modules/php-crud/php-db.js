@@ -27,7 +27,7 @@ module.exports.createDatabase = function(db) {
 
 // Reads the JSON file that contains all the stock item definitons
 function initStockItemsTable(db) {
-  let stockItems = require(path.join(__dirname + "/php-stock_items.json"));
+  let stockItems = require("./php-stock_items.json");
   //console.log(stockItems);
   let column_names = Object.keys(stockItems[0]);
   let valueSets = stockItems.map(function(item){
