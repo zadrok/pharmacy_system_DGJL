@@ -38,8 +38,6 @@
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
         <li class="active"><a href="stock.html">Stock List</a></li>
-        <li><a href="createupdate.html">Create/Update Stock</a></li>
-        <li><a href="delete.html">Delete Stock</a></li>
       </ul>
     </div>
   </nav>
@@ -48,8 +46,13 @@
   <div class="container-fluid">
     <div class="row well">
       <div class="col-md-2"></div>
-      <div class="col-md-10">
+      <div class="col-md-8">
         <h1>Stock</h1>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-lg btn-success" data-ng-click="Add()">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
       </div>
     </div>
 
@@ -97,8 +100,8 @@
                 <td>{{s.price}}</td>
                 <td>{{s.quantity}}</td>
                 <td>
-                  <button class="btn btn-info" data-ng-click="Update(s.code)">Update Item</button>
-                  <button class="btn btn-danger" data-ng-click="Delete(s.code)">Delete Item</button>
+                  <button class="btn btn-info" data-ng-click="Update(s.sku)">Update Item</button>
+                  <button class="btn btn-danger" data-ng-click="Delete(s.sku)">Delete Item</button>
                 </td>
               </tr>
             </tbody>

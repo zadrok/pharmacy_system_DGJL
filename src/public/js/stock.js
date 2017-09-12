@@ -25,4 +25,9 @@ app.controller("StockCtrl", function ($scope, $http) {
     console.log("Update " + itemCode);
   };
 
+  $scope.Add = function()
+  {
+    console.log("Add new item");
+  };
+
 });

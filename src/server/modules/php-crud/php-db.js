@@ -27,10 +27,15 @@ module.exports.createDatabase = function(db) {
 
 // Reads the JSON file that contains all the stock item definitons
 function initStockItemsTable(db) {
-  let stockItems = require("./php-stock_items.json");
+  let stockItems = require(path.join(__dirname + "/php-stock_items.json"));
+  //console.log(stockItems);
   let column_names = Object.keys(stockItems[0]);
-  let valueSets = stockItems.map(item => Object.values(item));
-  let placeholders = `${valueSets.map(valueSet => `(${valueSet.map(value => '?').join(',')})` ).join(',')}`;
+  let valueSets = stockItems.map(function(item){
+  	return Object.keys(item).map(function(key) {
+  		return item[key];
+  	});
+  });
+  let placeholders = `${valueSets.map(function(valueSet) {return `(${valueSet.map(function(value) { return '?' }).join(',')})`} ).join(',')}`;
   let sql = `INSERT INTO stock_items(${column_names}) VALUES ${placeholders}`;
   let flattnedValues = [].concat.apply([], valueSets);
   db.run(sql, flattnedValues, (err) => {
