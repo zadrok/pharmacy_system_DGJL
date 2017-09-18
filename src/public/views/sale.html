@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="SaleApp">
+<head>
+  <title>Pharmacy System DGJL</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Bootstrap -->
+  <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/custom.css" rel="stylesheet" />
+  <!-- HTML5 shiv and respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body ng-controller="SaleCtrl">
+  <div class="container-fluid hidden-xs">
+    <div class="row">
+      <div class="col-md-12 text-center"><h1>Pharmacy System DGJL</h1></div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggle"
+        data-toggle="collapse"
+        data-target="#mymenu">
+        <span class="sr-only">toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="navbar-brand visible-xs">Pharmacy System DGJL</a>
+    </div>
+    <div class="collapse navbar-collapse" id="mymenu"> <!-- nav body -->
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="stock.html">Stock List</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li class="active"><a href="sale.html">Sale</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid text-center">
+
+    <div class="row well">
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
+        <h1>Sales Cart</h1>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#addModal">
+          <span class="glyphicon glyphicon-plus"></span> Add item
+        </button>
+      </div>
+    </div>
+
+
+    <div class="row well text-center">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="table-responsive">
+
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Name</th>
+                <th class="text-center">Indivdual Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Sub-Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="item in cart">
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price * item.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row well">
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <h2>Total</h2>
+      </div>
+      <div class="col-md-2">
+        <h2>{{GetTotal()}}</h2>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-lg btn-success" ng-click="Submit()">
+          <span class="glyphicon glyphicon-ok"></span> Submit
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add item to cart</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" name="addForm" novalidate="novalidate">
+
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" placeholder="Name" data-ng-model="newSalesItem.name" required="required" />
+                </div>
+              </div>
+
+              <!--
+              <div ng-controller="MainCtrl as vm">
+                <input type="text"
+                ng-model="vm.breakfast"
+                placeholder="Breakfast"
+                auto-complete="vm.autoCompleteOptions" />
+              </div>
+              -->
+
+              <div class="form-group">
+                <label for="quantity" class="col-sm-2 control-label">Quantity: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="quantity" placeholder="Quantity" data-ng-model="newSalesItem.quantity" required="required" />
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-ng-click="Add()" data-dismiss="modal">
+              <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- jQuery – required for Bootstrap's JavaScript plugins) -->
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <!-- Bootstrap  plug-ins  file -->
+  <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AngularJS file -->
+  <script src="/lib/angular/angular.js"></script>
+  <!-- JS file used on this page -->
+  <script src="/js/sale.js"></script>
+</body>
+</html>
