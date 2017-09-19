@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module("SaleApp", []);
+var app = angular.module("SaleApp", ['autoCompleteModule']);
 
 app.controller("SaleCtrl", function ($scope, $http) {
   $scope.newSalesItem = {"name":"", "price":"", "quantity":""};
