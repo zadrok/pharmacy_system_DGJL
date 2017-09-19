@@ -6,3 +6,7 @@
 .navbar .navbar-collapse {
   text-align: center;
 }
+
+#clickItem:hover {
+  background-color: #C3C3C3
+}

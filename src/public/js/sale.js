@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module("SaleApp", ['autoCompleteModule']);
+var app = angular.module("SaleApp", []);
 
 app.controller("SaleCtrl", function ($scope, $http) {
   $scope.newSalesItem = {"name":"", "price":"", "quantity":""};
@@ -64,22 +64,4 @@ app.controller("SaleCtrl", function ($scope, $http) {
     }
   };
 
-});
-
-
-
-app.controller('MainCtrl', function() {
-  var that = this;
-  that.breakfast = null;
-
-  that.autoCompleteOptions = {
-    minimumChars: 0,
-    activateOnFocus: true,
-    data: function (term) {
-      term = term.toUpperCase();
-      return _.filter(BREAKFAST, function (value) {
-        return value.startsWith(term);
-      });
-    }
-  }
 });
