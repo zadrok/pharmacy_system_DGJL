@@ -37,10 +37,16 @@ app.controller("StockCtrl", function ($scope, $http) {
   $scope.Add = function()
   {
     console.log("Add new item " + $scope.newStockItem.name + ", Price: " + $scope.newStockItem.price + ", Quantity: " + $scope.newStockItem.quantity);
-      $scope.temp = [ {name:'name', value:$scope.newStockItem.name},
-                      {name:'price', value:$scope.newStockItem.price},
-                      {name:'qty', value:$scope.newStockItem.quantity}];
-    $http.post('/create',$scope.temp);
+      $scope.temp = JSON.stringify(
+        { name:$scope.newStockItem.name,
+          price:$scope.newStockItem.price,
+          quantity:$scope.newStockItem.quantity});
+    $http.post('/create',$scope.temp)
+    .then(
+        function (response) {
+          $scope.stock = response.data;
+        }
+      );
 
     $scope.newStockItem = null;
   };

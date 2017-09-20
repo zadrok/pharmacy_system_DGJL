@@ -31,22 +31,14 @@ var server = app.listen(app.get('port'), function() {
   console.log('Node webserver listenting on ' + port);
 })
 
-// >>>> demo code
-app.get('/*.json', function (req, res) {
-  console.log("pleb")
-  res.json("[{pleb:'pleb'}]")
-})
-// <<<< demo code
 
 app.post('/create', function (req, res) {
   console.log("create record request");
-  console.log(req.body);
-  var temp = JSON.parse(req.body);
-  console.console.log(temp.name);
-  console.log(req.body.name);
-
-  php_db.addStockItem(db, 'Jordan', 10, 12);
-  res.json();
+  console.log("create stock item: " + req.body);
+  php_db.addStockItem(db, req.body.name, req.body.price, req.body.quantity);
+  php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
 })
 app.post('/read', function (req, res) {
   console.log("read records request")
