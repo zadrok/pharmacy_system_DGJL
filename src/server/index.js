@@ -41,9 +41,9 @@ app.get('/*.json', function (req, res) {
 app.post('/create', function (req, res) {
   console.log("create record request");
   console.log(req.body);
-  var temp = JSON.parse(req.body);
-  console.console.log(temp.name);
-  console.log(req.body.name);
+  var temp = req.body;
+  console.log(typeof temp);
+
 
   php_db.addStockItem(db, 'Jordan', 10, 12);
   res.json();
