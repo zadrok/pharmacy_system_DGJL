@@ -17,6 +17,12 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
     }
   );
 
+  $scope.Update = function(item)
+  {
+    console.log("Updating " + item.id);
+    $scope.SetCurrentSalesTarget(null);
+  }
+
   $scope.Delete = function(item)
   {
     console.log("Deleting " + item.id);
