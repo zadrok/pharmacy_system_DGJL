@@ -6,7 +6,7 @@ module.exports.createDatabase = function(db) {
       //db.run('CREATE TABLE IF NOT EXISTS orders ( id integer NOT NULL CONSTRAINT order_pk PRIMARY KEY, order_no character(12) NOT NULL, sales_person_id integer NOT NULL, date datetime NOT NULL, CONSTRAINT client_order FOREIGN KEY (sales_person_id) REFERENCES sales_person (id))');
     //  db.run('CREATE TABLE IF NOT EXISTS order_item (id integer NOT NULL CONSTRAINT order_item_pk PRIMARY KEY, order_id integer NOT NULL, product_id integer NOT NULL, amount integer NOT NULL, CONSTRAINT order_order_item FOREIGN KEY (order_id) REFERENCES "order" (id), CONSTRAINT product_order_item FOREIGN KEY (product_id) REFERENCES product (id))');
       db.run('CREATE TABLE IF NOT EXISTS stock_items (\
-        sku INTEGER PRIMARY KEY, \
+        sku INTEGER PRIMARY KEY AUTOINCREMENT , \
         name NOT NULL, \
         price NOT NULL, \
         quantity NOT NULL)');
@@ -51,4 +51,8 @@ module.exports.getStockItems = function(db, callback) {
     //console.log(rows);
     callback(rows)
   });
+}
+
+module.exports.addStockItem = function(db, name, price, qty) {
+  db.run('INSERT INTO stock_items (name, price, quantity) VALUES (?, ?, ?)', name, price, qty);
 }

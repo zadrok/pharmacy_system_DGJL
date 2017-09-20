@@ -1,4 +1,5 @@
 var express = require('express')
+, bodyParser = require('body-parser');
 var app = express()
 var path = require('path')
 var php_db = require('./modules/php-crud/php-db')
@@ -15,7 +16,7 @@ var db = new sqlite3.Database(path.join(__dirname + '/modules/php-crud/php-DB.db
 
 // Define the port to run on
 app.set('port', 3000);
-
+app.use(bodyParser.json());
 // Static routes for public files
 app.use('/images', express.static(path.join(__dirname + '/../public/images')));
 app.use('/js', express.static(path.join(__dirname + '/../public/js')));
@@ -38,10 +39,14 @@ app.get('/*.json', function (req, res) {
 // <<<< demo code
 
 app.post('/create', function (req, res) {
-  console.log("create record request")
-  // <do create record>()
-  // get <result> from <do create record>()
-  // respond with res.json(<result>)
+  console.log("create record request");
+  console.log(req.body);
+  var temp = JSON.parse(req.body);
+  console.console.log(temp.name);
+  console.log(req.body.name);
+
+  php_db.addStockItem(db, 'Jordan', 10, 12);
+  res.json();
 })
 app.post('/read', function (req, res) {
   console.log("read records request")

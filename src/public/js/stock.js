@@ -37,7 +37,10 @@ app.controller("StockCtrl", function ($scope, $http) {
   $scope.Add = function()
   {
     console.log("Add new item " + $scope.newStockItem.name + ", Price: " + $scope.newStockItem.price + ", Quantity: " + $scope.newStockItem.quantity);
-    $http.post('/create');
+      $scope.temp = [ {name:'name', value:$scope.newStockItem.name},
+                      {name:'price', value:$scope.newStockItem.price},
+                      {name:'qty', value:$scope.newStockItem.quantity}];
+    $http.post('/create',$scope.temp);
 
     $scope.newStockItem = null;
   };
