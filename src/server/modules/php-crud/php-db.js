@@ -56,3 +56,9 @@ module.exports.getStockItems = function(db, callback) {
 module.exports.addStockItem = function(db, name, price, qty) {
   db.run('INSERT INTO stock_items (name, price, quantity) VALUES (?, ?, ?)', name, price, qty);
 }
+module.exports.updateStockItem = function(db, sku, name, price, qty) {
+  db.run('UPDATE stock_items SET name = ?, price = ?, quantity = ? WHERE sku = ?', name, price, qty, sku);
+}
+module.exports.deleteStockItem = function(db, sku) {
+  db.run('DELETE FROM stock_items WHERE sku=?', sku);
+}

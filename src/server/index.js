@@ -45,19 +45,18 @@ app.post('/read', function (req, res) {
   php_db.getStockItems(db, (rows) => {
     res.json(rows);
   })
-  // <do read records>()
-  // get <result> from <do read records>()
-  // respond with res.json(<result>)
 })
 app.post('/update', function (req, res) {
   console.log("update records request")
-  // <do update records>()
-  // get <result> from <do update records>()
-  // respond with res.json(<result>)
+  php_db.updateStockItem(db, req.body.sku, req.body.name, req.body.price, req.body.quantity);
+  php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
 })
 app.post('/delete', function (req, res) {
   console.log("delete records request")
-  // <do delete records>()
-  // get <result> from <do delete records>()
-  // respond with res.json(<result>)
+  php_db.deleteStockItem(db, req.body.sku);
+  php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
 })

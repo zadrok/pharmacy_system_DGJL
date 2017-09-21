@@ -6,22 +6,14 @@ app.controller("StockCtrl", function ($scope, $http) {
   $scope.newStockItem = null;
 
   $http.post('/read')
-  .then(
-    function (response) {
-      //console.log(response);
-      $scope.stock = response.data;
-
-    //console.log($scope.stock.length);
-    },
-    function (response) {
-      // error handling routine
-    }
-  );
+  .then(function (response) {$scope.stock = response.data;});
 
   $scope.Delete = function(item)
   {
-    console.log("Delete " + item.name);
-    $http.post('/delete');
+    console.log("Delete " + item.sku);
+    $scope.temp = JSON.stringify({ sku:item.sku});
+    $http.post('/delete',$scope.temp)
+    .then(function (response) {$scope.stock = response.data;});
 
     $scope.SetCurrentStockItem(null);
   };
@@ -29,24 +21,21 @@ app.controller("StockCtrl", function ($scope, $http) {
   $scope.Update = function(item)
   {
     console.log("Update " + item.name + ", Price: " + item.price + ", Quantity: " + item.quantity);
-    $http.post('/update');
-
+    $scope.temp = JSON.stringify(item);
+    $http.post('/update', $scope.temp)
+    .then(function (response) {$scope.stock = response.data})
     $scope.SetCurrentStockItem(null);
   };
 
   $scope.Add = function()
   {
     console.log("Add new item " + $scope.newStockItem.name + ", Price: " + $scope.newStockItem.price + ", Quantity: " + $scope.newStockItem.quantity);
-      $scope.temp = JSON.stringify(
-        { name:$scope.newStockItem.name,
-          price:$scope.newStockItem.price,
-          quantity:$scope.newStockItem.quantity});
+    $scope.temp = JSON.stringify(
+      { name:$scope.newStockItem.name,
+        price:$scope.newStockItem.price,
+        quantity:$scope.newStockItem.quantity});
     $http.post('/create',$scope.temp)
-    .then(
-        function (response) {
-          $scope.stock = response.data;
-        }
-      );
+    .then(function (response) {$scope.stock = response.data;});
 
     $scope.newStockItem = null;
   };
@@ -55,5 +44,4 @@ app.controller("StockCtrl", function ($scope, $http) {
   {
     $scope.currentStockItem = item;
   };
-
 });
