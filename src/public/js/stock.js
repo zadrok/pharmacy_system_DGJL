@@ -5,14 +5,14 @@ app.controller("StockCtrl", function ($scope, $http) {
   $scope.currentStockItem = null;
   $scope.newStockItem = null;
 
-  $http.post('/read')
+  $http.post('/read-skus')
   .then(function (response) {$scope.stock = response.data;});
 
   $scope.Delete = function(item)
   {
     console.log("Delete " + item.sku);
     $scope.temp = JSON.stringify({ sku:item.sku});
-    $http.post('/delete',$scope.temp)
+    $http.post('/delete-sku',$scope.temp)
     .then(function (response) {$scope.stock = response.data;});
 
     $scope.SetCurrentStockItem(null);
@@ -22,7 +22,7 @@ app.controller("StockCtrl", function ($scope, $http) {
   {
     console.log("Update " + item.name + ", Price: " + item.price + ", Quantity: " + item.quantity);
     $scope.temp = JSON.stringify(item);
-    $http.post('/update', $scope.temp)
+    $http.post('/update-sku', $scope.temp)
     .then(function (response) {$scope.stock = response.data})
     $scope.SetCurrentStockItem(null);
   };
@@ -34,7 +34,7 @@ app.controller("StockCtrl", function ($scope, $http) {
       { name:$scope.newStockItem.name,
         price:$scope.newStockItem.price,
         quantity:$scope.newStockItem.quantity});
-    $http.post('/create',$scope.temp)
+    $http.post('/create-sku',$scope.temp)
     .then(function (response) {$scope.stock = response.data;});
 
     $scope.newStockItem = null;
