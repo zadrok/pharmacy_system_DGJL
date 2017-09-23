@@ -54,6 +54,17 @@ app.controller("SaleCtrl", function ($scope, $http) {
     return total;
   };
 
+  $scope.RemoveFromCart = function(item)
+  {
+    for (var i = 0; i < $scope.cart.length; i++)
+    {
+      if (item.name == $scope.cart[i].name)
+      {
+        $scope.cart.splice(i,1);
+      }
+    }
+  };
+
   $scope.Submit = function()
   {
     if ($scope.cart.length)

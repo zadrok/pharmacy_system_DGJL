@@ -38,9 +38,9 @@
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="stock.html">Stock List</a></li>
-        <li><a href="report.html">Report</a></li>
         <li><a href="sale.html">Sale</a></li>
         <li class="active"><a href="pastSales.html">Past Sales</a></li>
+        <li><a href="report.html">Report</a></li>
       </ul>
     </div>
   </nav>
@@ -87,16 +87,18 @@
             <thead>
               <tr>
                 <th class="text-center">ID</th>
-                <th class="text-center">Amount</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Total Amount</th>
                 <th class="text-center">Options</th>
               </tr>
             </thead>
             <tbody>
               <tr data-ng-repeat="s in sales | filter:searchFilter">
                 <td>{{s.id}}</td>
-                <td>{{s.amount}}</td>
+                <td>{{s.date}}</td>
+                <td>{{s.totalAmount}}</td>
                 <td>
-                  <button class="btn btn-info" data-ng-click="SetCurrentSalesTarget(s)" data-toggle="modal" data-target="#updateModal">Update Item</button>
+                  <button class="btn btn-info" data-ng-click="SetCurrentSalesTarget(s)" data-toggle="modal" data-target="#viewModal">View</button>
                   <button class="btn btn-danger" data-ng-click="SetCurrentSalesTarget(s)" data-toggle="modal" data-target="#deleteModal">Delete Item</button>
                 </td>
               </tr>
@@ -113,15 +115,15 @@
 
 
 
-    <!-- Update Modal -->
-    <div class="modal fade" id="updateModal" role="dialog">
+    <!-- View Modal -->
+    <div class="modal fade" id="viewModal" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Update Stock Item</h4>
+            <h4 class="modal-title">View Past Sale</h4>
           </div>
           <div class="modal-body">
             <h2>{{currentSalesItem.id}}</h2>

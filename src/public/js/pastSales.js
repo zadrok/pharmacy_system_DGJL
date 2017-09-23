@@ -2,7 +2,7 @@
 var app = angular.module("PastSalesApp", []);
 
 app.controller("PastSalesCtrl", function ($scope, $http) {
-  $scope.currentSalesItem = {"id":"", "amount":""};
+  $scope.currentSalesItem = {id:"", date:"", totalAmount:""};
 
   $http.post('/read')
   .then(

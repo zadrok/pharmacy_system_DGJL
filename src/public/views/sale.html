@@ -38,8 +38,9 @@
       <ul class="nav navbar-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="stock.html">Stock List</a></li>
-        <li><a href="report.html">Report</a></li>
         <li class="active"><a href="sale.html">Sale</a></li>
+        <li><a href="pastSales.html">Past Sales</a></li>
+        <li><a href="report.html">Report</a></li>
       </ul>
     </div>
   </nav>
@@ -72,6 +73,7 @@
                 <th class="text-center">Indivdual Price</th>
                 <th class="text-center">Quantity</th>
                 <th class="text-center">Sub-Total</th>
+                <th class="text-center">Options</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +82,9 @@
                 <td>{{item.price}}</td>
                 <td>{{item.quantity}}</td>
                 <td>{{item.price * item.quantity}}</td>
+                <td>
+                  <button class="btn btn-danger" data-ng-click="RemoveFromCart(item);">Remove</button>
+                </td>
               </tr>
             </tbody>
           </table>
