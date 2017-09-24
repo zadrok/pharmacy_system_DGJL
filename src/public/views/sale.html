@@ -147,7 +147,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr id="clickItem" data-ng-repeat="item in stock | limitTo: 3 | filter: newSalesItem.name" ng-click="newSalesItem.name = item.name">
+                        <tr id="clickItem" data-ng-repeat="item in stock | filter: newSalesItem.name" ng-click="newSalesItem.name = item.name">
                           <td>{{item.name}}</td>
                           <td>{{item.price}}</td>
                         </tr>
