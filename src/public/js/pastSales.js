@@ -7,7 +7,8 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
   $scope.dateTo = new Date();
 
 
-  $scope.Read = function(){
+  $scope.Read = function()
+  {
     $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
     $http.post('/read-sales', $scope.requestBody)
     .then(
@@ -17,21 +18,27 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
     )
   }
 
-  $scope.Update = function(item)
-  {
-    console.log("Updating " + item.id);
-    $scope.SetCurrentSalesTarget(null);
-  }
-
   $scope.Delete = function(item)
   {
     console.log("Deleting " + item.id);
+    
+    //$scope.temp = JSON.stringify({ sku:item.sku });
+    //$http.post('/delete-sales',$scope.temp)
+    //.then(function (response) {$scope.sales = response.data;});
+
     $scope.SetCurrentSalesTarget(null);
+  }
+
+  $scope.FormatDate = function(item)
+  {
+    var a = item.split("T");
+    var b = a[1].split(".");
+    return "" + a[0] + " " + b[0];
   }
 
   $scope.SetCurrentSalesTarget = function(item)
   {
-    $scope.currentSalesItem = n;
+    $scope.currentSalesItem = item;
   }
 
   $scope.Read();

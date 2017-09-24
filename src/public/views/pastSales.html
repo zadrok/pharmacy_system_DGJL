@@ -86,8 +86,10 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th class="text-center">ID</th>
+                <th class="text-center">Sale ID</th>
+                <th class="text-center">Item Name</th>
                 <th class="text-center">Date</th>
+                <th class="text-center">Quantity</th>
                 <th class="text-center">Total Amount</th>
                 <th class="text-center">Options</th>
               </tr>
@@ -95,10 +97,11 @@
             <tbody>
               <tr data-ng-repeat="s in sales | filter:searchFilter">
                 <td>{{s.id}}</td>
-                <td>{{s.date}}</td>
-                <td>{{s.totalAmount}}</td>
+                <td>{{s.name}}</td>
+                <td>{{FormatDate(s.date)}}</td>
+                <td>{{s.quantity}}</td>
+                <td>{{s.price * s.quantity}}</td>
                 <td>
-                  <button class="btn btn-info" data-ng-click="SetCurrentSalesTarget(s)" data-toggle="modal" data-target="#viewModal">View</button>
                   <button class="btn btn-danger" data-ng-click="SetCurrentSalesTarget(s)" data-toggle="modal" data-target="#deleteModal">Delete Item</button>
                 </td>
               </tr>
@@ -110,43 +113,6 @@
     </div>
 
 
-
-
-
-
-
-    <!-- View Modal -->
-    <div class="modal fade" id="viewModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">View Past Sale</h4>
-          </div>
-          <div class="modal-body">
-            <h2>{{currentSalesItem.id}}</h2>
-
-            <form class="form-horizontal" name="updateForm" novalidate="novalidate">
-
-
-
-
-            </form>
-
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-ng-click="Update(currentSalesItem)" data-dismiss="modal">
-              <span class="glyphicon glyphicon-ok"></span> Update
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
 
 
     <!-- Delete Modal -->
@@ -161,7 +127,8 @@
           </div>
           <div class="modal-body">
             <p>Are you sure you want to delete</p>
-            <h2> <span class="label label-danger">{{currentSalesItem.id}}</span></h2>
+            <h2> <span class="label label-danger">{{currentSalesItem.id}} - {{currentSalesItem.name}}</span></h2>
+            <h2> <span class="label label-info">THIS DOESN"T WORK YET</span></h2>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success" data-ng-click="Delete(currentSalesItem)" data-dismiss="modal">
