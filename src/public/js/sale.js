@@ -71,7 +71,7 @@ app.controller("SaleCtrl", function ($scope, $http) {
     {
       console.log("Submit cart!");
       console.log($scope.cart);
-      $scope.temp = JSON.stringify({date:new Date().toLocaleString(), cart:$scope.cart});
+      $scope.temp = JSON.stringify({date:new Date().toJSON(), cart:$scope.cart});
       $http.post('/create-sale', $scope.temp)
       .then(function (response) {
           $scope.stock = response.data;

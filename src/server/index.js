@@ -31,7 +31,6 @@ var server = app.listen(app.get('port'), function() {
   console.log('Node webserver listenting on ' + port);
 })
 
-
 app.post('/create-sku', function (req, res) {
   console.log("create record request");
   console.log("create stock item: " + req.body);
@@ -65,6 +64,12 @@ app.post('/create-sale', function (req, res) {
   console.log("create sale request")
   php_db.recordSale(db, req.body.date, req.body.cart);
   php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
+})
+app.post('/read-sales', function (req, res) {
+  console.log("read sales request")
+  php_db.getSalesRecords(db, req.body.dateFrom, req.body.dateTo, (rows) => {
     res.json(rows);
   })
 })

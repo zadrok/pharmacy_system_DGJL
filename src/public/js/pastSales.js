@@ -3,19 +3,19 @@ var app = angular.module("PastSalesApp", []);
 
 app.controller("PastSalesCtrl", function ($scope, $http) {
   $scope.currentSalesItem = {id:"", date:"", totalAmount:""};
+  $scope.dateFrom = new Date(1970,1,1);
+  $scope.dateTo = new Date();
 
-  $http.post('/read')
-  .then(
-    function (response) {
-      //console.log(response);
-      $scope.sales = response.data;
 
-    //console.log($scope.stock.length);
-    },
-    function (response) {
-      // error handling routine
-    }
-  );
+  $scope.Read = function(){
+    $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
+    $http.post('/read-sales', $scope.requestBody)
+    .then(
+      function (response) {
+        $scope.sales = response.data;
+      }
+    )
+  }
 
   $scope.Update = function(item)
   {
@@ -34,4 +34,5 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
     $scope.currentSalesItem = n;
   }
 
+  $scope.Read();
 });

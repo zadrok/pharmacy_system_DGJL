@@ -77,9 +77,10 @@ module.exports.deleteStockItem = function(db, sku) {
 // Sales methods
 module.exports.getSalesRecords = function(db, dateFrom, dateTo, callback) {
   db.serialize(() => {
-    let sql = `SELECT * FROM sales_records \
-    WHERE datetime(date) BETWEEN datetime(${dateFrom}) AND datetime(${dateTo}) \
-    ORDER BY datetime(date) DESC`;
+    let sql = "SELECT * FROM sales_records WHERE datetime(date) "
+    + `BETWEEN datetime('${dateFrom}') AND datetime('${dateTo}')`
+    + " ORDER BY datetime(date) DESC";
+    console.log(sql)
     db.all(sql, [], (err, rows) => {
       if (err) { return console.error(err.message); }
       console.log(rows);
