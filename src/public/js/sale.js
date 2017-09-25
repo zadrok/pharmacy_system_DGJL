@@ -4,6 +4,7 @@ var app = angular.module("SaleApp", []);
 app.controller("SaleCtrl", function ($scope, $http) {
   $scope.newSalesItem = {sku:"",name:"", price:"", quantity:""};
   $scope.cart = [];
+  $scope.cartInOut = false;
 
   $http.post('/read-skus')
   .then(function (response) {

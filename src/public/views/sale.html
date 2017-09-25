@@ -39,7 +39,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="stock.html">Stock List</a></li>
         <li class="active"><a href="sale.html">Sale</a></li>
-        <li><a href="pastSales.html">Past Sales</a></li>
+        <li><a href="transactions.html">Transactions</a></li>
         <li><a href="report.html">Report</a></li>
       </ul>
     </div>
@@ -50,8 +50,12 @@
 
     <div class="row well">
       <div class="col-md-2"></div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <h1>Sales Cart</h1>
+      </div>
+      <div class="col-md-1">
+        In / Out
+        <input type="checkbox" class="form-control" ng-model="cartInOut" />
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#addModal">

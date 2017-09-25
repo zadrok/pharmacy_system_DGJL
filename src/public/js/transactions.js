@@ -1,10 +1,11 @@
 'use strict';
-var app = angular.module("PastSalesApp", []);
+var app = angular.module("TransactionsApp", []);
 
-app.controller("PastSalesCtrl", function ($scope, $http) {
-  $scope.currentSalesItem = {id:"", date:"", totalAmount:""};
+app.controller("TransactionsCtrl", function ($scope, $http) {
+  $scope.currentTransactionsItem = {id:"", date:"1T3.4", totalAmount:""};
   $scope.dateFrom = new Date(1970,1,1);
   $scope.dateTo = new Date();
+  $scope.transactionInOut = false;
 
 
   $scope.Read = function()
@@ -18,15 +19,15 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
     )
   }
 
-  $scope.Delete = function(item)
+  $scope.Refund = function(item)
   {
-    console.log("Deleting " + item.id);
-    
+    console.log("Refunding " + item.id);
+
     //$scope.temp = JSON.stringify({ sku:item.sku });
     //$http.post('/delete-sales',$scope.temp)
     //.then(function (response) {$scope.sales = response.data;});
 
-    $scope.SetCurrentSalesTarget(null);
+    //$scope.SetCurrentTransactionsTarget(null);
   }
 
   $scope.FormatDate = function(item)
@@ -36,9 +37,9 @@ app.controller("PastSalesCtrl", function ($scope, $http) {
     return "" + a[0] + " " + b[0];
   }
 
-  $scope.SetCurrentSalesTarget = function(item)
+  $scope.SetCurrentTransactionsTarget = function(item)
   {
-    $scope.currentSalesItem = item;
+    $scope.currentTransactionsItem = item;
   }
 
   $scope.Read();
