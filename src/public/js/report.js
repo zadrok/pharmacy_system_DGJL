@@ -4,6 +4,7 @@ var app = angular.module("ReportApp", []);
 app.controller("ReportCtrl", function ($scope, $http) {
   $scope.dateFrom = new Date();
   $scope.dateTo = new Date();
+  $scope.sku = null;
 
   $scope.GenerateReport = function()
   {
@@ -12,7 +13,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
     .then(
       function (response) {
         $scope.reportData = response.data;
-        let sku = 2; // Need an input field for this guy like in sales page
+        let sku = $scope.sku; // Need an input field for this guy like in sales page
         let skuData = $scope.reportData.filter((record) => record.sku == sku)
         let time = $scope.reportData.map((record) => new Date(record.date) )
         let sales = skuData.map((record) => record.quantity )
