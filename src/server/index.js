@@ -3,6 +3,7 @@ var express = require('express')
 var app = express()
 var path = require('path')
 var php_db = require('./modules/php-crud/php-db')
+var report = require('./modules/php-crud/report.js')
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(path.join(__dirname + '/modules/php-crud/php-DB.db'),
 (err) => {
