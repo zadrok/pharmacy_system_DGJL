@@ -31,8 +31,7 @@ var server = app.listen(app.get('port'), function() {
   console.log('Node webserver listenting on ' + port);
 })
 
-
-app.post('/create', function (req, res) {
+app.post('/create-sku', function (req, res) {
   console.log("create record request");
   console.log("create stock item: " + req.body);
   php_db.addStockItem(db, req.body.name, req.body.price, req.body.quantity);
@@ -40,23 +39,37 @@ app.post('/create', function (req, res) {
     res.json(rows);
   })
 })
-app.post('/read', function (req, res) {
+app.post('/read-skus', function (req, res) {
   console.log("read records request")
   php_db.getStockItems(db, (rows) => {
     res.json(rows);
   })
 })
-app.post('/update', function (req, res) {
+app.post('/update-sku', function (req, res) {
   console.log("update records request")
   php_db.updateStockItem(db, req.body.sku, req.body.name, req.body.price, req.body.quantity);
   php_db.getStockItems(db, (rows) => {
     res.json(rows);
   })
 })
-app.post('/delete', function (req, res) {
+app.post('/delete-sku', function (req, res) {
   console.log("delete records request")
   php_db.deleteStockItem(db, req.body.sku);
   php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
+})
+
+app.post('/create-sale', function (req, res) {
+  console.log("create sale request")
+  php_db.recordSale(db, req.body.date, req.body.cart);
+  php_db.getStockItems(db, (rows) => {
+    res.json(rows);
+  })
+})
+app.post('/read-sales', function (req, res) {
+  console.log("read sales request")
+  php_db.getSalesRecords(db, req.body.dateFrom, req.body.dateTo, (rows) => {
     res.json(rows);
   })
 })

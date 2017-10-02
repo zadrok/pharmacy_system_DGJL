@@ -7,6 +7,11 @@
   <!-- Bootstrap -->
   <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/css/custom.css" rel="stylesheet" />
+  <!-- Load c3.css -->
+  <link href="/lib/c3/c3.css" rel="stylesheet">
+  <!-- Load d3.js and c3.js -->
+  <script src="/lib/d3/d3.min.js" charset="utf-8"></script>
+  <script src="/lib/c3/c3.min.js"></script>
   <!-- HTML5 shiv and respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -39,7 +44,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="stock.html">Stock List</a></li>
         <li><a href="sale.html">Sale</a></li>
-        <li><a href="pastSales.html">Past Sales</a></li>
+        <li><a href="transactions.html">Transactions</a></li>
         <li class="active"><a href="report.html">Report</a></li>
       </ul>
     </div>
@@ -53,10 +58,49 @@
       <div class="col-md-3">
         <h1>Report</h1>
       </div>
-      <div class="col-md-7">
-        <button type="button" class="btn btn-lg btn-success" ng-click="GenerateReport()">
-          <span class="glyphicon glyphicon-list-alt"></span> Generate Report
-        </button>
+    </div>
+
+    <div class="row well">
+      <div class="col-md-12">
+
+        <form class="form-horizontal" name="FilterForm" novalidate="novalidate">
+          <div class="row">
+            <div class="col-md-10">
+
+              <div class="form-group">
+                <label for="dateFrom" class="col-sm-2 control-label">Date From</label>
+                <div class="col-sm-4">
+                  <input type="date" class="form-control" id="dateFrom" ng-model="dateFrom" />
+                </div>
+                <label for="dateTo" class="col-sm-2 control-label">Date To</label>
+                <div class="col-sm-4">
+                  <input type="date" class="form-control" id="dateTo" ng-model="dateTo" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="sku" class="col-sm-2 control-label">SKU</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" id="sku" ng-model="sku" />
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-lg btn-success" ng-click="GenerateReport()">
+                    <span class="glyphicon glyphicon-list-alt"></span> Generate Report
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="chart"></div>
       </div>
     </div>
 
