@@ -5,6 +5,7 @@ app.controller("SaleCtrl", function ($scope, $http) {
   $scope.newSalesItem = {sku:"",name:"", price:"", quantity:""};
   $scope.cart = [];
   $scope.cartInOut = false;
+  $scope.transactionType = "SALE";
 
   $http.post('/read-skus')
   .then(function (response) {
@@ -64,6 +65,11 @@ app.controller("SaleCtrl", function ($scope, $http) {
         $scope.cart.splice(i,1);
       }
     }
+  };
+
+  $scope.TypeSelect = function(type)
+  {
+    $scope.transactionType = type;
   };
 
   $scope.Submit = function()

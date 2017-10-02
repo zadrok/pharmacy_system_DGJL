@@ -5,8 +5,7 @@ app.controller("TransactionsCtrl", function ($scope, $http) {
   $scope.currentTransactionsItem = {id:"", date:"1T3.4", totalAmount:""};
   $scope.dateFrom = new Date(1970,1,1);
   $scope.dateTo = new Date();
-  $scope.transactionInOut = false;
-
+  $scope.transactionType = "BOTH";
 
   $scope.Read = function()
   {
@@ -17,7 +16,12 @@ app.controller("TransactionsCtrl", function ($scope, $http) {
         $scope.sales = response.data;
       }
     )
-  }
+  };
+
+  $scope.TypeSelect = function(type)
+  {
+    $scope.transactionType = type;
+  };
 
   $scope.Refund = function(item)
   {
@@ -28,19 +32,19 @@ app.controller("TransactionsCtrl", function ($scope, $http) {
     //.then(function (response) {$scope.sales = response.data;});
 
     //$scope.SetCurrentTransactionsTarget(null);
-  }
+  };
 
   $scope.FormatDate = function(item)
   {
     var a = item.split("T");
     var b = a[1].split(".");
     return "" + a[0] + " " + b[0];
-  }
+  };
 
   $scope.SetCurrentTransactionsTarget = function(item)
   {
     $scope.currentTransactionsItem = item;
-  }
+  };
 
   $scope.Read();
 });
