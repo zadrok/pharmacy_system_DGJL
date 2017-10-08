@@ -20,7 +20,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
       function (response) {
         $scope.reportData = response.data.reverse(); // data comes in as latest first which isn't normal convention so we reverse it.
         let sku = $scope.sku;
-        let skuData = $scope.reportData.filter((record) => record.sku != sku)
+        let skuData = $scope.reportData.filter((record) => record.sku == sku)
         let time = skuData.map((record) => new Date(record.date) )
 
         let timeRange = moment.range($scope.dateFrom, $scope.dateTo)
@@ -33,51 +33,63 @@ app.controller("ReportCtrl", function ($scope, $http) {
 
         // This is a really heavy function, there is probably a way better way to do it
         // should also definitely be async
-        let aggregatedSales = evenIntervals.map((interval) => {
-            let sum = sales.reduce((acc, s, i) => {
-                if(interval.contains(moment(time[i]))){
-                  return acc += s
-                }
-                return acc;
-              }, 0)
-            return sum
-        }
-      )
 
-        aggregatedSales.filter((avg,i)=> i >= evenTimes.length)
-
-        
-        // Simple moving average
-        let smaPeriod = Math.max($scope.smaPeriod,1)
-        let sma = aggregatedSales.map((data,i,arr) => arr.slice(i,i+smaPeriod).reduce((acc, data)=>acc+data)/smaPeriod )
-        sma = Array(smaPeriod).fill(null).concat(sma)
-
-
-        sma.filter((avg,i)=> i >= evenTimes.length)
-
-        console.log("Making Report");
-        let chart = c3.generate({
-          bindto: '#chart',
-          data: {
-            x: 'time',
-            xFormat: '%Y-%m-%dT%H:%M:%S.%LZ',
-            columns: [
-              ['time'].concat(evenTimes),
-              ['sales'].concat(aggregatedSales),
-              ['sma'].concat(sma)
-            ]
-          },
-          axis: {
-              x: {
-                  type: 'timeseries',
-                  tick: {
-                    format: '%Y-%m-%d %H:%M:%S',
-                    rotate: 90
+        try
+        {
+          let aggregatedSales = evenIntervals.map((interval) => {
+              let sum = sales.reduce((acc, s, i) => {
+                  if(interval.contains(moment(time[i]))){
+                    return acc += s
                   }
-
-              }
+                  return acc;
+                }, 0)
+              return sum
           }
-        })
+        )
+
+          aggregatedSales = aggregatedSales.filter((avg,i)=> i >= evenTimes.length)
+
+
+          // Simple moving average
+          let smaPeriod = Math.max($scope.smaPeriod,1)
+          let sma = aggregatedSales.map((data,i,arr) => arr.slice(i,i+smaPeriod).reduce((acc, data)=>acc+data)/smaPeriod )
+          sma = Array(smaPeriod).fill(null).concat(sma)
+
+
+          sma = sma.filter((avg,i)=> i >= evenTimes.length)
+
+          console.log("Making Report");
+          let chart = c3.generate({
+            bindto: '#chart',
+            data: {
+              x: 'time',
+              xFormat: '%Y-%m-%dT%H:%M:%S.%LZ',
+              columns: [
+                ['time'].concat(evenTimes),
+                ['sales'].concat(aggregatedSales),
+                ['sma'].concat(sma)
+              ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                      format: '%Y-%m-%d %H:%M:%S',
+                      rotate: 90
+                    }
+
+                }
+            }
+          })
+        }
+        catch (err)
+        {
+          alert("Make Date Range Larger");
+          console.log("make date range larger");
+          //console.log(err);
+        }
+
+
       }
     )
   }
