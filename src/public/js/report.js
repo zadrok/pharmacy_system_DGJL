@@ -12,12 +12,8 @@ app.controller("ReportCtrl", function ($scope, $http) {
 
   $scope.dataAggergationUnit = 'weeks';
   $scope.numberOfAggregationUnit = 1;
+  
   $scope.GenerateReport = function() {
-    
-    // TODO : this probably isn't right
-    moment().add(1, dataAggergationUnit);
-
-
     $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
     $http.post('/read-sales', $scope.requestBody)
     .then(
