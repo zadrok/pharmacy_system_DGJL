@@ -3,8 +3,8 @@ var app = angular.module("ReportApp", []);
 window['moment-range'].extendMoment(moment);
 
 app.controller("ReportCtrl", function ($scope, $http) {
-  $scope.dateFrom = moment('2017-10-06T10:25').toDate();//.subtract(1,'hours').toDate(); //yyyy,m,d
-  $scope.dateTo = moment('2017-10-06T10:35').toDate();
+  $scope.dateFrom = moment().subtract(7,'days').toDate();//.subtract(1,'hours').toDate(); //yyyy,m,d
+  $scope.dateTo = moment().toDate();
 
   $scope.sku = 0; // (TODO : Someone please change this guy to be autocomplete name)
   //this looks at the past x values and takes the average as the prediction for the next.  Its more of an indicator than a predictor but still valuable
@@ -12,7 +12,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
 
   $scope.dataAggergationUnit = 'weeks';
   $scope.numberOfAggregationUnit = 1;
-  
+
   $scope.GenerateReport = function() {
     $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
     $http.post('/read-sales', $scope.requestBody)
@@ -20,7 +20,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
       function (response) {
         $scope.reportData = response.data.reverse(); // data comes in as latest first which isn't normal convention so we reverse it.
         let sku = $scope.sku;
-        let skuData = $scope.reportData.filter((record) => record.sku == sku)
+        let skuData = $scope.reportData.filter((record) => record.sku != sku)
         let time = skuData.map((record) => new Date(record.date) )
 
         let timeRange = moment.range($scope.dateFrom, $scope.dateTo)
@@ -48,6 +48,8 @@ app.controller("ReportCtrl", function ($scope, $http) {
         let smaPeriod = Math.max($scope.smaPeriod,1)
         let sma = aggregatedSales.map((data,i,arr) => arr.slice(i,i+smaPeriod).reduce((acc, data)=>acc+data)/smaPeriod )
         sma = Array(smaPeriod).fill(null).concat(sma)
+
+        sma.filter((avg,i)=> i >= evenTimes.length)
 
         console.log("Making Report");
         let chart = c3.generate({
