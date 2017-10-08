@@ -3,7 +3,7 @@ var app = angular.module("TransactionsApp", []);
 
 app.controller("TransactionsCtrl", function ($scope, $http) {
   $scope.currentTransactionsItem = {id:"", date:"1T3.4", totalAmount:""};
-  $scope.dateFrom = new Date(1970,1,1);
+  $scope.dateFrom = new Date();
   $scope.dateTo = new Date();
   $scope.transactionType = "BOTH"; //TODO : use this
 

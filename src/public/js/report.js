@@ -10,9 +10,14 @@ app.controller("ReportCtrl", function ($scope, $http) {
   //this looks at the past x values and takes the average as the prediction for the next.  Its more of an indicator than a predictor but still valuable
   $scope.smaPeriod = 2;
 
-  $scope.dataAggergationUnit = 'days'; // TODO ???????? : Someone please create UI hook for this string see https://github.com/rotaready/moment-range#equality for values
+  $scope.dataAggergationUnit = 'weeks';
   $scope.numberOfAggregationUnit = 1;
-  {
+  $scope.GenerateReport = function() {
+    
+    // TODO : this probably isn't right
+    moment().add(1, dataAggergationUnit);
+
+
     $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
     $http.post('/read-sales', $scope.requestBody)
     .then(
