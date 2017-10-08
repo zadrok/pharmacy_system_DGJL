@@ -44,10 +44,14 @@ app.controller("ReportCtrl", function ($scope, $http) {
         }
       )
 
+        aggregatedSales.filter((avg,i)=> i >= evenTimes.length)
+
+        
         // Simple moving average
         let smaPeriod = Math.max($scope.smaPeriod,1)
         let sma = aggregatedSales.map((data,i,arr) => arr.slice(i,i+smaPeriod).reduce((acc, data)=>acc+data)/smaPeriod )
         sma = Array(smaPeriod).fill(null).concat(sma)
+
 
         sma.filter((avg,i)=> i >= evenTimes.length)
 
