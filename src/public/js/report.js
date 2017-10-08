@@ -18,8 +18,9 @@ app.controller("ReportCtrl", function ($scope, $http) {
     $http.post('/read-sales', $scope.requestBody)
     .then(
       function (response) {
-        $scope.reportData = response.data.reverse(); // data comes in as latest first which isn't normal convention so we reverse it.
-        let sku = $scope.sku;
+        $scope.reportData = response.data.reverse() // data comes in as latest first which isn't normal convention so we reverse it.
+
+        let sku = $scope.sku
         let skuData = $scope.reportData.filter((record) => record.sku == sku)
         let time = skuData.map((record) => new Date(record.date) )
 
@@ -34,8 +35,8 @@ app.controller("ReportCtrl", function ($scope, $http) {
         // This is a really heavy function, there is probably a way better way to do it
         // should also definitely be async
 
-        try
-        {
+        // try
+        // {
           let aggregatedSales = evenIntervals.map((interval) => {
               let sum = sales.reduce((acc, s, i) => {
                   if(interval.contains(moment(time[i]))){
@@ -47,7 +48,6 @@ app.controller("ReportCtrl", function ($scope, $http) {
           }
         )
 
-          aggregatedSales = aggregatedSales.filter((avg,i)=> i >= evenTimes.length)
 
 
           // Simple moving average
@@ -56,7 +56,13 @@ app.controller("ReportCtrl", function ($scope, $http) {
           sma = Array(smaPeriod).fill(null).concat(sma)
 
 
-          sma = sma.filter((avg,i)=> i >= evenTimes.length)
+          sma = sma.filter((val,i)=> (val != null && i <= evenTimes.length) )
+          aggregatedSales = aggregatedSales.filter((val,i)=> (val != null && i <= evenTimes.length) )
+          console.log(sales)
+          console.log(skuData)
+          console.log(['time'].concat(evenTimes))
+          console.log(['sales'].concat(aggregatedSales))
+          console.log(['sma'].concat(sma))
 
           console.log("Making Report");
           let chart = c3.generate({
@@ -81,13 +87,13 @@ app.controller("ReportCtrl", function ($scope, $http) {
                 }
             }
           })
-        }
-        catch (err)
-        {
-          alert("Make Date Range Larger");
-          console.log("make date range larger");
-          //console.log(err);
-        }
+        // }
+        // catch (err)
+        // {
+        //   alert("Make Date Range Larger");
+        //   console.log("make date range larger");
+        //   //console.log(err);
+        // }
 
 
       }
