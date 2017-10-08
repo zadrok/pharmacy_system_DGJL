@@ -6,12 +6,12 @@ app.controller("ReportCtrl", function ($scope, $http) {
   $scope.dateFrom = moment('2017-10-06T10:25').toDate();//.subtract(1,'hours').toDate(); //yyyy,m,d
   $scope.dateTo = moment('2017-10-06T10:35').toDate();
 
-  $scope.sku = null; // Need an input field for this guy like in sales page (TODO : Someone please change this guy to be autocomplete name)
+  $scope.sku = 0; // (TODO : Someone please change this guy to be autocomplete name)
   //this looks at the past x values and takes the average as the prediction for the next.  Its more of an indicator than a predictor but still valuable
-  $scope.smaPeriod = 2; // TODO : Someone please create UI hook for this natural number value,
+  $scope.smaPeriod = 2;
 
-  $scope.dataAggergationUnit = 'days' // TODO : Someone please create UI hook for this string see https://github.com/rotaready/moment-range#equality for values
-  $scope.numberOfAggregationUnit = 1 // TODO : Someone please create UI hook for this natural number value
+  $scope.dataAggergationUnit = 'days'; // TODO ???????? : Someone please create UI hook for this string see https://github.com/rotaready/moment-range#equality for values
+  $scope.numberOfAggregationUnit = 1;
   {
     $scope.requestBody = JSON.stringify({dateFrom:$scope.dateFrom.toJSON(), dateTo:$scope.dateTo.toJSON()});
     $http.post('/read-sales', $scope.requestBody)

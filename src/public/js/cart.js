@@ -5,7 +5,7 @@ app.controller("SaleCtrl", function ($scope, $http) {
   $scope.newSalesItem = {sku:"",name:"", price:"", quantity:""};
   $scope.cart = [];
   $scope.cartInOut = false;
-  $scope.transactionType = "SALE";
+  $scope.transactionType = "SALE"; //TODO : use this
 
   $http.post('/read-skus')
   .then(function (response) {
