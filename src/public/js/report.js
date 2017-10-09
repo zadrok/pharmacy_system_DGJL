@@ -21,7 +21,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
         $scope.reportData = response.data.reverse() // data comes in as latest first which isn't normal convention so we reverse it.
 
         let sku = $scope.sku
-        let skuData = $scope.reportData.filter((record) => record.sku == sku)
+        let skuData = $scope.reportData.filter((record) => (record.sku == sku || sku ==0))
         let time = skuData.map((record) => new Date(record.date) )
 
         let timeRange = moment.range($scope.dateFrom, $scope.dateTo)
@@ -52,6 +52,7 @@ app.controller("ReportCtrl", function ($scope, $http) {
 
           // Simple moving average
           let smaPeriod = Math.max($scope.smaPeriod,1)
+          //fix here
           let sma = aggregatedSales.map((data,i,arr) => arr.slice(i,i+smaPeriod).reduce((acc, data)=>acc+data)/smaPeriod )
           sma = Array(smaPeriod).fill(null).concat(sma)
 
